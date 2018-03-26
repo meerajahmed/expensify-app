@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import React from "react";
 
 const defaultState = {
   count: 0
