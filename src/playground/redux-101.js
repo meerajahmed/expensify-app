@@ -29,7 +29,7 @@ const store = createStore((state = defaultState, action) => {
       return {
         count: 0
       };
-      
+
     case "SET":
       return {
         count: action.count
