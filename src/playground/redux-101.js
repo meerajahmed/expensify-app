@@ -9,15 +9,25 @@ const defaultState = {
  * Store: tracks data/state over time
  * Actions: allow us to change redux store
  * Subscribe: watch state changes
+ * Action generators: functions that return action objects
  * */
+
+/*const incrementCount = ( { incrementBy } = {} ) => ({
+  type: "INCREMENT",
+  incrementBy: typeof incrementBy === "number" ? incrementBy : 1
+});*/
+// replace ternary operator with default value of 1
+const incrementCount = ( { incrementBy = 1 } = {} ) => ({
+  type: "INCREMENT",
+  incrementBy: incrementBy
+});
 
 const store = createStore((state = defaultState, action) => {
   switch(action.type){
 
     case "INCREMENT":
-      const incrementBy = typeof action.incrementBy === "number" ? action.incrementBy : 1;
       return {
-        count: state.count + incrementBy
+        count: state.count + action.incrementBy
       };
 
     case "DECREMENT":
@@ -46,14 +56,9 @@ store.subscribe(() => {
 });
 
 
-store.dispatch({
-  type: "INCREMENT"
-});
+store.dispatch(incrementCount());
 
-store.dispatch({
-  type: "INCREMENT",
-  incrementBy: 5
-});
+store.dispatch(incrementCount({incrementBy: 5}));
 
 store.dispatch({
   type: "DECREMENT"
