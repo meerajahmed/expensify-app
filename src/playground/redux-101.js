@@ -36,6 +36,13 @@ const resetCount = () => ({
   type: "RESET"
 });
 
+/*
+* Reducers
+* 1. Reducers are pure functions
+* 2. Never change sate or action
+*
+* */
+
 const countReducer = (state = defaultState, action) => {
   switch(action.type){
 
