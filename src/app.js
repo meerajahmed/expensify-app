@@ -12,8 +12,8 @@ import getVisibleExpenses from "./selectors/expenses";
 
 const store = configureStore();
 
-store.dispatch(addExpense({ description: "Water bill" }));
-store.dispatch(addExpense({ description: "Gas bill" }));
+store.dispatch(addExpense({ description: "Water bill", amount: 123 }));
+store.dispatch(addExpense({ description: "Gas bill", amount: 30 }));
 store.dispatch(setTextFilter("Water"));
 
 const state = store.getState();
