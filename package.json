@@ -8,7 +8,9 @@
     "build:watch": "webpack --watch --mode=development",
     "build:jsx": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react",
     "build:jsx:watch": "npm run build:jsx -- --watch",
-    "build:jsx:playground": "babel src/playground/counter-state-example.js --out-file=public/scripts/app.js --presets=env,react --watch"
+    "build:jsx:playground": "babel src/playground/counter-state-example.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "test": "jest",
+    "test:w": "npm test -- --watch"
   },
   "main": "public/index.js",
   "dependencies": {
@@ -34,6 +36,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "jest": "^22.4.3",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
