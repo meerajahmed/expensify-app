@@ -5,9 +5,16 @@ import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import {  withStyles } from 'react-with-styles';
 
-import 'react-dates/lib/css/_datepicker.css';
-
 export default class ExpenseForm extends React.Component {
+
+  state = {
+    description: "",
+    note: "",
+    amount: "",
+    createdAt: moment(),
+    calenderFocused: false,
+    error: false
+  };
 
   constructor(props){
     super(props);
@@ -29,15 +36,6 @@ export default class ExpenseForm extends React.Component {
     }
     this.state = defaultState;
   }
-
-  state = {
-    description: "",
-    note: "",
-    amount: "",
-    createdAt: moment(),
-    calenderFocused: false,
-    error: false
-  };
 
   onDescriptionChange = (event) => {
     const description = event.target.value;
