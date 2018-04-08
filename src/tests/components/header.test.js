@@ -5,11 +5,10 @@
 * Snapshot allow us to track changes to data over time
 * */
 import React from "react"; // for JSX
-import ReactShallowRenderer from "react-test-renderer/shallow";
+import { shallow } from "enzyme";
 import Header from "../../components/header";
 
 test("should render Header correctly", () => {
-  const renderer = new ReactShallowRenderer();
-  renderer.render(<Header />);
-  expect(renderer.getRenderOutput()).toMatchSnapshot();
+  const wrapper = shallow(<Header />);
+  expect(wrapper).toMatchSnapshot();
 });
