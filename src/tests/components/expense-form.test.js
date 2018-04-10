@@ -4,7 +4,7 @@ import ExpenseForm from "../../components/expense-form";
 import expenses from "../fixtures/expenses";
 
 test("should render ExpenseForm correctly", () => {
-  const wrapper = shallow(<ExpenseForm />);
+  const wrapper = shallow(<ExpenseForm />); // shallow render the component
   expect(wrapper).toMatchSnapshot();
 });
 
@@ -21,4 +21,15 @@ test("should render error for invalid form submission", () => {
   });
   expect(wrapper.state("error")).toBeTruthy();
   expect(wrapper).toMatchSnapshot();
+});
+
+test("should set description on input change", () => {
+  const value = "New Description";
+  const wrapper = shallow(<ExpenseForm />);
+  wrapper.find("input").at(0).simulate("change", {
+    target: {
+      value
+    }
+  });
+  expect(wrapper.state("description")).toBe(value);
 });
