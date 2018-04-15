@@ -1,17 +1,18 @@
 import React from "react";
 import {shallow} from "enzyme";
 import {ExpenseListFilter} from "../../components/expense-list-filter";
-import {filters} from "../fixtures/filters";
+import {filters, altFilters} from "../fixtures/filters";
 
+let setStartDate, setEndDate, setTextFilter, sortByAmount, sortByDate, wrapper;
 
-test("should render expense list filter correctly", () => {
-  const setStartDate = jest.fn();
-  const setEndDate = jest.fn();
-  const setTextFilter = jest.fn();
-  const sortByAmount = jest.fn();
-  const sortByDate = jest.fn();
+beforeEach(() => {
+  setStartDate = jest.fn();
+  setEndDate = jest.fn();
+  setTextFilter = jest.fn();
+  sortByAmount = jest.fn();
+  sortByDate = jest.fn();
 
-  const wrapper = shallow(
+  wrapper = shallow(
     <ExpenseListFilter
       filters={ filters }
       setStartDate={setStartDate}
@@ -21,5 +22,31 @@ test("should render expense list filter correctly", () => {
       sortByDate={sortByDate}
     />
   );
+});
+
+test("should render expense list filter correctly", () => {
   expect(wrapper).toMatchSnapshot();
 });
+
+test("should render expense list filter with alt data correctly", () => {
+  //update props
+  wrapper.setProps({
+    filters: altFilters
+  });
+  expect(wrapper).toMatchSnapshot();
+});
+
+test("should handle text change", () => {
+  const value = "bills";
+  wrapper.find("input").simulate("change", {
+    target: { value }
+  });
+});
+
+test("should sor by date", () => {});
+
+test("should sort by amount", () => {});
+
+test("should handle date change", () => {});
+
+test("should handle date focus change", () => {});
