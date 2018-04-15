@@ -3,6 +3,15 @@
 exports[`should render edit expense page correctly 1`] = `
 <div>
   <ExpenseForm
+    expense={
+      Object {
+        "amount": 109500,
+        "createdAt": -345600000,
+        "description": "Rent",
+        "id": "2",
+        "note": "",
+      }
+    }
     onSubmit={[Function]}
   />
   <button
