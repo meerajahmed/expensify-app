@@ -1,9 +1,8 @@
-const path  = require("path");
+const path = require("path");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env, args) => {
   const isProduction = env === "production";
-  const extractCSS = new ExtractTextPlugin("styles.css");
 
   return {
     entry: "./src/app.js",
@@ -26,12 +25,20 @@ module.exports = (env, args) => {
          * use : when we have multiple loader
          * */
         /*{
-          use: ["style-loader", "css-loader", "sass-loader"],
-          test: /\.s?css$/
-        }*/
+         use: ["style-loader", "css-loader", "sass-loader"],
+         test: /\.s?css$/
+         }*/
+        /*{
+         test: /\.s?css$/,
+         use: ExtractTextPlugin.extract({
+         fallback: "style-loader",
+         use: ["css-loader", "sass-loader"]
+         })
+         },*/
         {
           test: /\.s?css$/,
-          use: extractCSS.extract({
+          use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
             use: [
               {
                 loader: "css-loader",
@@ -51,7 +58,7 @@ module.exports = (env, args) => {
       ]
     },
     plugins: [
-      extractCSS
+      new ExtractTextPlugin("styles.css")
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",
     devServer: {
