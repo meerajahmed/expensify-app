@@ -65,6 +65,7 @@ module.exports = (env, args) => {
       contentBase: path.join(__dirname, "public"),
       // fallback to /index.html
       historyApiFallback: true,
+      publicPath: "/dist/" // required for webpack dev server. By default the publicPath is "/"
     }
     /*
      * production: source-map
