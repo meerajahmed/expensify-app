@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import ExpenseForm from "./expense-form";
-import { addExpense } from "../actions/expenses";
+import { startAddExpense } from "../actions/expenses";
 
 /*
 const AddExpensePage = (props) => (
@@ -19,7 +19,7 @@ export class AddExpensePage extends React.Component {
 
   onSubmit = (expense) => {
     //props.dispatch(addExpense(expense));
-    this.props.addExpense(expense); // easy to spy on expense argument
+    this.props.startAddExpense(expense); // easy to spy on expense argument
     this.props.history.push('/');
   };
 
@@ -40,7 +40,7 @@ export class AddExpensePage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => (
   {
-    addExpense: (expense) => dispatch(addExpense(expense))
+    startAddExpense: (expense) => dispatch(startAddExpense(expense))
   }
 );
 export default connect(undefined, mapDispatchToProps)(AddExpensePage);

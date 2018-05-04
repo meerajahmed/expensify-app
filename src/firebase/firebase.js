@@ -13,6 +13,11 @@ var config = {
 firebase.initializeApp(config);
 
 // get firebase database service
+/*
 firebase.database().ref().set({
   author: "Andrew Mead"
-});
+});*/
+
+const database = firebase.database();
+
+export { firebase, database as default };
