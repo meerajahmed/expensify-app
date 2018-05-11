@@ -6,3 +6,7 @@
 
 # IDEs and editors
 /.idea
+
+# firebase config
+.env.test
+.env.development
