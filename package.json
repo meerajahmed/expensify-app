@@ -6,7 +6,7 @@
     "start": "node server/server.js",
     "heroku-postbuild": "npm run build:prod",
     "serve": "webpack-dev-server --mode=development",
-    "build:dev": "webpack --mode=development",
+    "build:dev": "cross-env NODE_ENV=development webpack --mode=development",
     "build:prod": "webpack --mode=production --env=production",
     "build:watch": "webpack --watch --mode=development",
     "build:jsx": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react",
