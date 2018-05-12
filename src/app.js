@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import AppRouters from "./routers/app-router";
-import configureStore from "./store/configureStore"
+import configureStore from "./store/configureStore";
 
 import "normalize.css/normalize.css";
 import "./style/style.scss";
