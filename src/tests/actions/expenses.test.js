@@ -2,6 +2,7 @@ import { removeExpense, updateExpense, addExpense, startAddExpense } from "../..
 import expenses from "../fixtures/expenses";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import database from "../../firebase/firebase";
 
 const createMockStore = configureMockStore([thunk]);
 
@@ -73,11 +74,26 @@ test("should add expense to database and store", (done) => {
     note: "This one is better",
     amount: 3000,
     createdAt: 1000
-  }
+  };
+
   store.dispatch(startAddExpense(expense))
     .then(() => {
-      expect(1).toBe(1);
-      done(); // required for async test case
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "ADD_EXPENSE",
+        expense: {
+          id: expect.any(String),
+          ...expense
+        }
+      });
+      //done(); // required for async test case
       // force jest to wait until this code is executed
+    
+      return database.ref(`expense/${actions[0].expense.id}`)
+        .once("value");
+    }).then((snapshot) => {
+      expect(snapshot.val()).toEqual(expense);
+      done();
     });
+
 });
