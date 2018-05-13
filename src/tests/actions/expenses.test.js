@@ -96,4 +96,35 @@ test("should add expense to database and store", (done) => {
       done();
     });
 
-});
+}, 10000);
+
+test("should add expense to database and store with default values", (done) => {
+  const store = createMockStore({});
+  const expense = {
+    description: "",
+    note: "",
+    amount: 0,
+    createdAt: 0
+  };
+
+  store.dispatch(startAddExpense(expense))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "ADD_EXPENSE",
+        expense: {
+          id: expect.any(String),
+          ...expense
+        }
+      });
+      //done(); // required for async test case
+      // force jest to wait until this code is executed
+    
+      return database.ref(`expense/${actions[0].expense.id}`)
+        .once("value");
+    }).then((snapshot) => {
+      expect(snapshot.val()).toEqual(expense);
+      done();
+    });
+
+}, 10000);
