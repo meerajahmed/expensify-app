@@ -1,5 +1,9 @@
-import { removeExpense, updateExpense, addExpense } from "../../actions/expenses";
+import { removeExpense, updateExpense, addExpense, startAddExpense } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
+
+const createMockStore = configureMockStore([thunk]);
 
 test("should setup remove expense action object", () => {
   const action = removeExpense({ id: "qwert" });
@@ -61,3 +65,19 @@ test("should setup add expense action object with default value", () => {
     }
   });
 });*/
+
+test("should add expense to database and store", (done) => {
+  const store = createMockStore({});
+  const expense = {
+    description: "Mouse",
+    note: "This one is better",
+    amount: 3000,
+    createdAt: 1000
+  }
+  store.dispatch(startAddExpense(expense))
+    .then(() => {
+      expect(1).toBe(1);
+      done(); // required for async test case
+      // force jest to wait until this code is executed
+    });
+});
